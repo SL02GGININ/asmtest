@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首爾旅遊 | 亞洲旅遊者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #e05938;
+            --secondary: #f4a261;
+            --accent: #e9c46a;
+            --dark: #264653;
+            --light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --warm-light: #fff8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, '微軟正黑體', sans-serif;
+        }
+        
+        body {
+            background-color: var(--warm-light);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: var(--dark);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        /* === Glow Button Style for Navigation === */
+        nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 40px;
+        border: none;
+        outline: none;
+        color: whitesmoke;
+        cursor: pointer;
+        position: relative;
+        z-index: 0;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 14px;
+        }
+
+        nav a:before {
+        content: '';
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00,
+            #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 10px;
+        }
+
+        nav a:hover:before {
+        opacity: 1;
+        }
+
+        nav a:after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ec9145;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+        }
+
+        nav a.active {
+        background: #ff0000, #ff7300, #fffb00, #48ff00,
+            #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000;
+        }
+
+        @keyframes glowing {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+        }
+        
+        /* Hero Section */
+        .destination-hero {
+            height: 500px;
+            background: linear-gradient(rgba(236, 233, 233, 0.055), rgba(87, 84, 84, 0)), 
+                        url('https://images.unsplash.com/photo-1534274867514-d5b47ef89ed7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .destination-hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .destination-hero-content p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #d45a3d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Content Section */
+        .destination-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .content-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #035a53;
+        }
+        
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .attraction {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .attraction:hover {
+            transform: translateY(-5px);
+        }
+        
+        .attraction-img {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .attraction-content {
+            padding: 20px;
+        }
+        
+        .attraction h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .attraction p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box i {
+            color: var(--primary);
+        }
+        
+        .info-box ul {
+            list-style: none;
+        }
+        
+        .info-box ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .info-box ul li:before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .destination-hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .destination-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-container iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <image width="60" src="./LOGO.png" alt="website logo"></image>
+                <h1>亞洲<span>旅遊者</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="24_LamChakSum_webpage.html" target="_blank">首頁</a></li>
+                    <li><a href="Tokyo.html" target="_blank">東京</a></li>
+                    <li><a href="Seoul.html" class="active">首爾</a></li>
+                    <li><a href="Bangkok.html" target="_blank">曼谷</a></li>
+                    <li><a href="Hanoi.html" target="_blank">河內</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Destination Hero -->
+    <section class="destination-hero">
+        <div class="destination-hero-content">
+            <h1>韓國首爾</h1>
+            <p>古老宮殿與現代文化的完美交融</p>
+            <a href="#attractions" class="btn">探索景點</a>
+        </div>
+    </section>
+
+    <!-- Destination Content -->
+    <section class="container destination-content">
+        <div class="main-content">
+            <div class="content-section">
+                <h2>關於首爾</h2>
+                首爾是韓國的首都，也是世界上最具活力的城市之一。這座城市巧妙地融合了悠久的歷史與現代化發展，從古老的宮殿和傳統韓屋到高聳的摩天大樓和前沿科技，首爾為遊客提供了豐富多元的體驗。
+                作為韓國的經濟、文化和時尚中心，首爾擁有世界級的購物區、令人驚嘆的美食場景和充滿活力的K-pop文化。無論您是歷史愛好者、美食探索者還是潮流追隨者，首爾都能滿足您的所有期待。<br><br>
+
+                <h2>首爾歷史</h2> 
+                <p><b>早期歷史與朝鮮王朝 (1392-1897)</b><br><hr>
+                首爾（舊稱漢陽或漢城）的歷史可追溯至數千年前，但其重要地位始於1394年。那年，朝鮮王朝的開國君主李成桂將都城從開城遷至漢陽，並更名為漢城（Hanseong）。
+                城市按照儒家風水原則規劃，景福宮等王宮和環繞的城牆相繼建成。在接下來的五個世紀裡，它一直是朝鮮王朝的政治、經濟和文化中心。</p><br>
+
+                <p><b>帝國時期與殖民統治 (1897-1945)</b><br><hr>
+                1897年，朝鮮高宗宣布成立大韓帝國，並將漢城改稱為京城（Gyeongseong）。
+                1910年，日本吞併朝鮮半島，開始了長達35年的殖民統治。在此期間，城市進行了現代化改造，但許多傳統建築被破壞，發展主要服務於日本的殖民利益。</p><br>
+
+                <p><b>戰後與現代化 (1945-1990s)</b><br><hr>
+                1945年日本投降後，京城獲得解放。1948年大韓民國成立，城市定名為首爾（Seoul，源於古語「首都」之意），正式成為韓國首都。</p><br>
+
+                <p><b>韓戰 (1950-1953)</b><br><hr>
+                給城市造成了毀滅性破壞。戰後，首爾在廢墟中開始了驚人的重建與現代化，創造了「漢江奇蹟」。
+                1988年夏季奧運會是首爾作為現代化國際城市登上世界舞台的重要標誌，展示了其經濟和技術成就。</p><br>
+
+                <p><b>現代首爾：全球中心</b><br><hr>
+                今天的首爾是韓國的政治、經濟、科技和文化中心，以高科技基礎設施、流行文化（韓流）和充滿活力的都市生活著稱。
+                它持續進行城市更新項目，如清溪川復原工程，並積極主辦國際活動，鞏固其作為全球領先大都市的地位。</p><br>
+
+                <p><b>總而言之，首爾的歷史是一部不斷重生與轉型的史詩：從王朝都城，到殖民據點，再到戰後廢墟中崛起的技術與文化強國之都。</b></p>
+            </div>
+
+
+        <div class="content-section" id="attractions">
+            <h2>熱門景點</h2>
+            <div class="attractions-grid">
+                <div class="attraction">
+                    <div class="attraction-img" style="background-image: url('./Gyeongbokgun.png');"></div>
+                    <div class="attraction-content">
+                        <h3>景福宮</h3>
+                        <p>朝鮮王朝的主要宮殿，建於1395年，是首爾五大宮殿中最古老且規模最大的。</p>
+                    </div>
+                </div>
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./seoultower.jpg');"></div>
+                        <div class="attraction-content">
+                            <h3>首爾塔</h3>
+                            <p>位於南山頂部的標誌性塔樓，提供360度全景視野，俯瞰整個首爾市區。</p>
+                        </div>
+                    </div>
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./Myeong-dong.jpg');"></div>
+                        <div class="attraction-content">
+                            <h3>明洞</h3>
+                            <p>首爾最著名的購物和娛樂區，擁有眾多百貨公司、品牌店和街頭小吃攤。</p>
+                        </div>
+                    </div>
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./北村韓屋村.webp');"></div>
+                        <div class="attraction-content">
+                            <h3>北村韓屋村</h3>
+                            <p>保存完好的傳統韓屋區，漫步其中可以體驗朝鮮時代的傳統生活方式。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>文化與傳統</h2>
+                <p>首爾的文化是傳統韓國遺產與全球當代影響的完美平衡。儘管這座城市以其科技進步和K-pop文化聞名，但傳統習俗如韓服穿著、傳統茶道和宗廟祭禮仍然蓬勃發展。</p>
+                <p>儒家價值觀仍然影響著社會互動，強調對長輩的尊重和層級關係。韓國的"情"概念——深厚的情感聯繫——體現了首爾人之間的溫暖關係。</p>
+            </div>
+            
+            <div class="video-section">
+                <h2>首爾旅遊影片</h2>
+                <div class="video-container">
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/1luRu-Hwo8s" title="韓國首爾六天五夜 玩爆27個景點！🔥｜Seoul, Korea Itinerary ｜CC  Subtitles｜交通、逛街路線、行程全攻略｜韓國必逛必吃必玩｜樂天世界｜愛寶樂園｜🇰🇷韓國自由行🇰🇷" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> 實用資訊</h3>
+                <ul>
+                    <li><strong>國家：</strong> 韓國</li>
+                    <li><strong>人口：</strong> 970萬</li>
+                    <li><strong>語言：</strong> 韓語</li>
+                    <li><strong>貨幣：</strong> 韓元 (₩)</li>
+                    <li><strong>最佳旅遊時間：</strong> 4月-6月, 9月-11月</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-plane"></i> 交通指南</h3>
+                <ul>
+                    <li>仁川國際機場 (ICN)</li>
+                    <li>金浦國際機場 (GMP)</li>
+                    <li>優質的機場鐵路連接市中心</li>
+                    <li>首爾地鐵系統極為便利</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-utensils"></i> 必試美食</h3>
+                <ul>
+                    <li>韓國燒烤</li>
+                    <li>拌飯</li>
+                    <li>泡菜</li>
+                    <li>辣炒年糕</li>
+                    <li>韓式炸雞</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-shopping-bag"></i> 購物推薦</h3>
+                <ul>
+                    <li>明洞 - 化妝品與時尚</li>
+                    <li>東大門 - 服裝批發</li>
+                    <li>弘大 - 年輕潮流</li>
+                    <li>梨泰院 - 國際品牌</li>
+                    <li>南大門市場 - 傳統市場</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>亞洲旅遊者</h3><hr>
+                    <p><br>您值得信賴的指南，提供詳細信息和實用旅行提示，幫助您發現亞洲最令人驚嘆的目的地。</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>快速連結</h3><hr>
+                    <ul>
+                        <li><a href="24_LamChakSum_webpage.html"><br>首頁</a></li>
+                        <li><a href="#">旅行提示</a></li>
+                        <li><a href="#">最佳旅行時間</a></li>
+                        <li><a href="#">文化指南</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>目的地</h3><hr>
+                    <ul>
+                        <li><a href="Tokyo.html" target="_blank"><br>日本東京</a></li>
+                        <li><a href="Seoul.html">韓國首爾</a></li>
+                        <li><a href="Bangkok.html" target="_blank">泰國曼谷</a></li>
+                        <li><a href="Hanoi.html" target="_blank">越南河內</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>聯絡資訊</h3><hr>
+                    <ul>
+                        <li><br><i class="fas fa-envelope"></i> info@asiatraveller.com</li>
+                        <li><i class="fas fa-phone"></i> +852 88888888</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 旅行街, 探險城</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 亞洲旅遊者. 版權所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight active navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('nav a').forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

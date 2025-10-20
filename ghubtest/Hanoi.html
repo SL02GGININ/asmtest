@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>河內旅遊 | 亞洲旅遊者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #e05938;
+            --secondary: #f4a261;
+            --accent: #e9c46a;
+            --dark: #264653;
+            --light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --warm-light: #fff8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, '微軟正黑體', sans-serif;
+        }
+        
+        body {
+            background-color: var(--warm-light);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: var(--dark);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        /* === Glow Button Style for Navigation === */
+        nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 40px;
+        border: none;
+        outline: none;
+        color: whitesmoke;
+        cursor: pointer;
+        position: relative;
+        z-index: 0;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 14px;
+        }
+
+        nav a:before {
+        content: '';
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00,
+            #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 10px;
+        }
+
+        nav a:hover:before {
+        opacity: 1;
+        }
+
+        nav a:after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ec9145;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+        }
+
+        nav a.active {
+        background: #ff0000, #ff7300, #fffb00, #48ff00,
+            #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000;
+        }
+
+        @keyframes glowing {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+        }
+        
+        /* Hero Section */
+        .destination-hero {
+            height: 500px;
+            background: linear-gradient(rgba(228, 226, 226, 0.082), rgba(59, 243, 243, 0.5)), 
+                        url('./Vietnam.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .destination-hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .destination-hero-content p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #d45a3d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Content Section */
+        .destination-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .content-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #035a53;
+        }
+        
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .attraction {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .attraction:hover {
+            transform: translateY(-5px);
+        }
+        
+        .attraction-img {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .attraction-content {
+            padding: 20px;
+        }
+        
+        .attraction h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .attraction p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box i {
+            color: var(--primary);
+        }
+        
+        .info-box ul {
+            list-style: none;
+        }
+        
+        .info-box ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .info-box ul li:before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        
+        /* Food Section */
+        .food-section {
+            background-color: white;
+            padding: 60px 0;
+            margin: 60px 0;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .food-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .food-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .food-item h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        /* Cultural Section */
+        .cultural-section {
+            background-color: rgb(255, 255, 255);
+            padding: 60px 0;
+            margin: 60px 0;
+            border-radius: 10px;
+        }
+        
+        .cultural-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .cultural-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: rgb(238, 230, 220);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .cultural-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .destination-hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .destination-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-container iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <image width="60" src="./LOGO.png" alt="website logo"></image>
+                <h1>亞洲<span>旅遊者</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="24_LamChakSum_webpage.html" target="_blank">首頁</a></li>
+                    <li><a href="Tokyo.html" target="_blank">東京</a></li>
+                    <li><a href="Seoul.html" target="_blank">首爾</a></li>
+                    <li><a href="Bangkok.html" target="_blank">曼谷</a></li>
+                    <li><a href="Hanoi.html" class="active">河內</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Destination Hero -->
+    <section class="destination-hero">
+        <div class="destination-hero-content">
+            <h1>越南河內</h1>
+            <p>千年古都的法式風情與街頭美食</p>
+            <a href="#attractions" class="btn">探索景點</a>
+        </div>
+    </section>
+
+    <!-- Destination Content -->
+    <section class="container destination-content">
+        <div class="main-content">
+            <div class="content-section">
+                <h2>關於河內</h2>
+                河內是越南的首都，擁有超過千年的歷史，是越南的文化、政治和教育中心。這座城市完美地融合了傳統越南文化與法國殖民時期的建築遺產，創造出獨特的城市風貌。
+                河內以其豐富的歷史遺跡、迷人的老街區、美味的街頭美食和悠閒的生活節奏而聞名。從古老的寺廟和歷史博物館到充滿活力的夜市和咖啡文化，河內為遊客提供了真正地道的越南體驗。<br><br>
+            
+                <h2>河內歷史</h2>
+            <p><b>早期歷史與升龍（Thăng Long）時期（約1010年-1802年）</b><br><hr>
+            河內地區的歷史可追溯至數千年前，但其作為重要都城的起點是1010年。當時，李朝太祖李公蘊認為此地風水極佳，下詔將都城從華閭遷至大羅城，並將新城命名為升龍（意為「騰飛的巨龍」）。
+            在接下來的八百多年裡，升龍一直是越南多個朝代（李朝、陳朝、後黎朝等）的政治、經濟和文化中心，儘管其間名稱曾有過變動（如東都、東關）。</p><br>
+
+            <p><b>阮朝與殖民時期（1802-1945）</b><br><hr>
+            1802年，阮朝建立，定都於順化。升龍的地位下降，被更名為河內（意為「被河流環繞的內城」），並成為北部的一個重要總督區首府。
+            1888年，法國殖民政府正式將河內確立為法屬印度支那聯邦的首都。他們在此進行了大規模的歐洲風格城市規劃，修建了許多別墅、林蔭大道和行政建築，奠定了現代河內的城市骨架。</p><br>
+
+            <p><b>戰爭與獨立時期（1945-1975）</b><br><hr>
+            1945年，胡志明在河內的巴亭廣場發表《獨立宣言》，宣告越南民主共和國成立。隨後，法國試圖重新控制印度支那，爆發了第一次印度支那戰爭。
+            1954年，奠邊府戰役勝利後，日內瓦協議確認河內為越南北部（越南民主共和國）的首都。
+            在接下來的越南戰爭期間，河內作為北越的政治和軍事指揮中心，遭受了猛烈的空襲，但城市的核心功能得以保存。</p><br>
+
+            <p><b>統一與現代化（1975年至今）</b><br><hr>
+            1976年，越南統一，河內正式成為越南社會主義共和國的首都。
+            自1986年實施「革新開放」政策以來，河內進入了快速發展和現代化的新階段，高樓大廈和現代化設施不斷湧現。
+            2010年，河內隆重舉行了建城1000週年的慶典，彰顯其悠久的歷史與文化底蘊。</p><br>
+
+            <p><b>總而言之，河內的歷史是一部千年古都的傳承與演進史：從李朝的「升龍」起步，歷經王朝更迭、殖民統治與戰火洗禮，最終成為一個正在飛速邁向現代化的社會主義國家的政治文化中心。</b></p>
+            
+            
+            
+            
+            
+            </div>
+
+            <div class="content-section" id="attractions">
+                <h2>熱門景點</h2>
+                <div class="attractions-grid">
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./Hồ\ Hoàn\ Kiếm.jpg');"></div>
+                        <div class="attraction-content">
+                            <h3>還劍湖</h3>
+                            <p>河內的心臟地帶，傳說中黎太祖在此歸還神劍，周邊有龜塔和玉山寺。</p>
+                        </div>
+                    </div>
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./Khu\ phố\ cổ\ Hà\ Nội.jpg');"></div>
+                        <div class="attraction-content">
+                            <h3>三十六古街</h3>
+                            <p>河內的老城區，每條街道以傳統行業命名，充滿歷史氛圍和當地生活氣息。</p>
+                        </div>
+                    </div>
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./Lăng\ Chủ\ tịch\ Hồ\ Chí\ Minh.jpg');"></div>
+                        <div class="attraction-content">
+                            <h3>胡志明陵寢</h3>
+                            <p>越南革命領袖胡志明的安息之地，是越南最重要的歷史紀念建築之一。</p>
+                        </div>
+                    </div>
+                    <div class="attraction">
+                        <div class="attraction-img" style="background-image: url('./Văn\ Miếu\ Hà\ Nội.webp');"></div>
+                        <div class="attraction-content">
+                            <h3>文廟</h3>
+                            <p>越南第一所大學，建於1070年，供奉孔子，是越南儒教文化的象徵。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>文化與傳統</h2>
+                <p>河內的文化反映了越南複雜的歷史，融合了中國傳統、法國殖民影響和本土文化。這座城市保持著與傳統中國節日、寺廟儀式和家庭價值觀的緊密聯繫，同時擁抱民主理念和技術創新。</p>
+                <p>越南文化強調熱情好客，當地人以對遊客友善而聞名。"熱鬧"的概念描述了河內街道、市場和節日中充滿活力的熱鬧氛圍。</p>
+            </div>
+            
+            <div class="video-section">
+                <h2>河內旅遊影片</h2>
+                <div class="video-container">
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/4GK2qCxDqPg" title="【越南河內自由行2025】初遊首都3日2夜(舊城/火車街/法國區/西湖住宿)｜實試人氣名物：牛肉河粉小店勝名店、烤肉米粉、雞絲河粉、蛋咖啡｜Kiki and May Ft. SurfsharkVPN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> 實用資訊</h3>
+                <ul>
+                    <li><strong>國家：</strong> 越南</li>
+                    <li><strong>人口：</strong> 820萬</li>
+                    <li><strong>語言：</strong> 越南語</li>
+                    <li><strong>貨幣：</strong> 越南盾 (₫)</li>
+                    <li><strong>最佳旅遊時間：</strong> 10月-4月</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-plane"></i> 交通指南</h3>
+                <ul>
+                    <li>內排國際機場 (HAN)</li>
+                    <li>嘉林機場 (用於國內航班)</li>
+                    <li>機場巴士連接市中心</li>
+                    <li>建議使用Grab或傳統計程車</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fas fa-utensils"></i> 必試美食</h3>
+                <ul>
+                    <li>越南牛肉河粉</li>
+                    <li>越式法包</li>
+                    <li>生春捲</li>
+                    <li>雞蛋咖啡</li>
+                    <li>河粉烤肉米線</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-shopping-bag"></i> 購物推薦</h3>
+                <ul>
+                    <li>同春市場 - 傳統市場</li>
+                    <li>三十六古街 - 手工藝品</li>
+                    <li>Vincom Center - 現代商場</li>
+                    <li>書街 - 文化商品</li>
+                    <li>夜市場 - 週末夜市</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-map-signs"></i> 一日遊推薦</h3>
+                <ul>
+                    <li>下龍灣 - 世界遺產</li>
+                    <li>寧平 - 陸上下龍灣</li>
+                    <li>沙巴 - 山區部落文化</li>
+                    <li>香寺 - 佛教聖地</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>亞洲旅遊者</h3><hr>
+                    <p><br>您值得信賴的指南，提供詳細信息和實用旅行提示，幫助您發現亞洲最令人驚嘆的目的地。</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>快速連結</h3><hr>
+                    <ul>
+                        <li><a href="24_LamChakSum_webpage.html"><br>首頁</a></li>
+                        <li><a href="#">旅行提示</a></li>
+                        <li><a href="#">最佳旅行時間</a></li>
+                        <li><a href="#">文化指南</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>目的地</h3><hr>
+                    <ul>
+                        <li><a href="Tokyo.html" target="_blank"><br>日本東京</a></li>
+                        <li><a href="Seoul.html" target="_blank">韓國首爾</a></li>
+                        <li><a href="Bangkok.html" target="_blank">泰國曼谷</a></li>
+                        <li><a href="Hanoi.html">越南河內</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>聯絡資訊</h3><hr>
+                    <ul>
+                        <li><br><i class="fas fa-envelope"></i> info@asiatraveller.com</li>
+                        <li><i class="fas fa-phone"></i> +852 88888888</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 旅行街, 探險城</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 亞洲旅遊者. 版權所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight active navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('nav a').forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
